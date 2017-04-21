@@ -5,7 +5,7 @@ Note: I have used closure as a way to keep reference of the current visible
 */
 const studentsPerPage = 10;                   //you can alter the number of students per page with this constant
 
-$.fn.extend({                                //Added two functionalities to jquery so chaining methods can flow better
+$.fn.extend({                                //Added four functionalities to jquery so chaining methods can flow better
 	chain: function(func) {                  //chain recieves a func runs it with the current jquery value and returns the outcome of that function on the next stack of the jquery object
 		return this.pushStack(func(this.get()));
 	},
@@ -124,6 +124,11 @@ const students = $('.student-item').sort(sortByName)            //gets the initi
 								   .appendTo('.student-list')   //appends them to the .student-list element based off of the sorted list result
 								   .addClass('hideMe');         //gives all the student elements the hideMe class to hide them
 
+$('.page-header').append('<div class="student-search"></div>')            //Adding the search bar dynamically
+				 .children('.student-search')
+				 .append('<input placeholder="Search for students...">')
+				 .append('<button>Search</button>')
+				 .children('button')
+				 .on('click', searchStudents);                            //gives the search button a click event handler
+								   
 appendButtons(students, createButtons(students.length, studentsPerPage));   //creates the approriate number of buttons and sends them and the student list to be appended and used in the appendButtons function
-					 
-$('.student-search button').on('click', searchStudents)  //gives the search button a click event handler
